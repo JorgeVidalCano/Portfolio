@@ -5,8 +5,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Jorge Vidal Cano</title>
-  <meta content="Backend developer" name="description">
+  <title>{% if tab %} {{ tab }} {% else %} Tab {% endif %}</title>
+  {% load meta %}
+  <meta content="{% metaDescription %}" name="description">
   <meta content="" name="keywords">
 
   <!-- Google Fonts -->
