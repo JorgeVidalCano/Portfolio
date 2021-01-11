@@ -1,6 +1,6 @@
 from django.views.generic import(TemplateView)
 from django.shortcuts import render
-from .models import HomeData
+from .models import HomeData, AboutData
 
 class Home(TemplateView):
     template_name = 'mainApp/home.html'
@@ -14,15 +14,16 @@ class Home(TemplateView):
             'homedata': homedata,
         })
         return context
+        
 class About(TemplateView):
     template_name = 'mainApp/about.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #homedata = HomeData.objects.first()
+        aboutData = AboutData.objects.first()
         context.update({
             'tab': 'About',
-            #'homedata': homedata,
+            'aboutData': aboutData,
         })
         return context    
 
