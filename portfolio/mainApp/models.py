@@ -15,13 +15,12 @@ class HomeData(models.Model):
         return self.mainName
 
 class AboutData(models.Model):
-    firstParagraph = models.CharField(max_length=300)
+    firstParagraph = models.TextField(max_length=300)
     title = models.CharField(max_length=50)
     birthday = models.DateField()
-    country = models.CharField(max_length=8)
+    city = models.CharField(max_length=8)
     education = models.CharField(max_length=20) 
     email = models.CharField(max_length=35)
-    extraInfobotoom = models.CharField(max_length=300)
+    extraInfobottom = models.TextField(max_length=300)
 
-    skillText = models.CharField(max_length=300)
-    
+    skillText = models.TextField(max_length=300)
