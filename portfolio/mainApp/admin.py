@@ -44,3 +44,8 @@ class AboutAdmin(admin.ModelAdmin):
             return False
         else:
             return True
+
+@admin.register(SkillData)
+class SkillAdmin(admin.ModelAdmin):
+    list_display = ['skill']
+    
