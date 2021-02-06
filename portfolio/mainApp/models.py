@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+
 class MetaData(models.Model):
     metaDescription = models.CharField(max_length=60, blank=True)
     metaKeywords = models.CharField(max_length=100, blank=True)
@@ -21,6 +22,7 @@ class AboutData(models.Model):
     birthday = models.DateField()
     city = models.CharField(max_length=8)
     github = models.CharField(max_length=60)
+    languages = models.CharField(max_length=60)
     education = models.CharField(max_length=20) 
     email = models.EmailField(max_length=35)
     extraInfobottom = models.TextField(max_length=300)
@@ -32,6 +34,7 @@ LEVEL = [
     ('Medium', 'Medium'),
     ('Advance', 'Advance')
 ]
+
 class SkillData(models.Model):
     skill = models.CharField(max_length=30)
     img = models.ImageField(upload_to ='Images', blank=True,)
@@ -41,3 +44,22 @@ class SkillData(models.Model):
 
     def __str__(self):
             return self.skill
+
+RESUME = [
+    ('S', 'Sumary'),
+    ('E', 'Sumary'),
+    ('E', 'Experience'),
+]
+
+class ResumeData(models.Model):
+    name = models.CharField(max_length=30)
+    start = models.DateTimeField(blank=True)
+    end = models.DateTimeField(blank=True)
+    resume = models.CharField(choices=RESUME, max_length=12)
+    company = models.CharField(max_length=30)
+    details = models.ForeignKey()
+
+
+class DetailsData(models.Model):
+    resume = models.ForeignKey(ResumeData, on_delete=models.CASCADE, related_name="details")
+    detail = models.CharField(max_length=300)
