@@ -1,6 +1,6 @@
 from django.views.generic import(TemplateView)
 from django.shortcuts import render
-from .models import HomeData, AboutData, SkillData
+from .models import HomeData, AboutData, SkillData, ResumeData
 
 class Home(TemplateView):
     template_name = 'mainApp/home.html'
@@ -35,8 +35,11 @@ class Resume(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        experience = ResumeData.objects.filter(resume="X")
+
         context.update({
             'tab':'Resume',
+            'experience': experience,
         })
 
         return context

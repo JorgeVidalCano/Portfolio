@@ -47,19 +47,26 @@ class SkillData(models.Model):
 
 RESUME = [
     ('S', 'Sumary'),
-    ('E', 'Sumary'),
-    ('E', 'Experience'),
+    ('E', 'Education'),
+    ('X', 'Experience'),
 ]
 
 class ResumeData(models.Model):
     name = models.CharField(max_length=30)
-    start = models.DateTimeField(blank=True)
-    end = models.DateTimeField(blank=True)
+    start = models.DateField(blank=True)
+    end = models.DateField(blank=True)
+    location = models.CharField(max_length=30)
     resume = models.CharField(choices=RESUME, max_length=12)
     company = models.CharField(max_length=30)
-    details = models.ForeignKey()
+    #resume = models.ForeignKey(DetailsData, on_delete=models.CASCADE, related_name="details")
+    #details = models.ForeignKey()
 
+    def __str__(self):
+        return self.name
 
 class DetailsData(models.Model):
     resume = models.ForeignKey(ResumeData, on_delete=models.CASCADE, related_name="details")
     detail = models.CharField(max_length=300)
+
+    def __str__(self):
+        return ""

@@ -49,3 +49,18 @@ class AboutAdmin(admin.ModelAdmin):
 class SkillAdmin(admin.ModelAdmin):
     list_display = ['skill']
     
+@admin.register(DetailsData)
+class DetailsDataAdmin(admin.ModelAdmin):
+    list_display = ['detail']
+
+
+class DetailListAdmin(admin.StackedInline):
+    list_display =("detail")
+    model = DetailsData
+    
+
+@admin.register(ResumeData)
+class ResumeData(admin.ModelAdmin):
+    inlines = [DetailListAdmin]
+    list_display = ['name', 'start', 'end', 'resume', 'company']
+    
