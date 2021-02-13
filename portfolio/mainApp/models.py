@@ -64,6 +64,9 @@ class ResumeData(models.Model):
     def __str__(self):
         return self.name
 
+    def getDetails(self):
+        return DetailsData.objects.filter(resume= self)
+
 class DetailsData(models.Model):
     resume = models.ForeignKey(ResumeData, on_delete=models.CASCADE, related_name="details")
     detail = models.CharField(max_length=300)
