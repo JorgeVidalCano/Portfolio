@@ -47,25 +47,31 @@ class SkillData(models.Model):
 
 RESUME = [
     ('S', 'Sumary'),
+    ('M', 'Main'),
     ('E', 'Education'),
     ('X', 'Experience'),
+]
+LANGUAGES =[
+    ('E', 'English'),
+    ('S', 'Spanish')
 ]
 
 class ResumeData(models.Model):
     name = models.CharField(max_length=30)
-    start = models.DateField(blank=True)
-    end = models.DateField(blank=True)
-    location = models.CharField(max_length=30)
+    start = models.DateField(blank=True, null=True)
+    end = models.DateField(blank=True, null=True)
+    mainText = models.TextField(blank=True)
+    location = models.CharField(max_length=30, blank=True)
     resume = models.CharField(choices=RESUME, max_length=12)
-    company = models.CharField(max_length=30)
-    #resume = models.ForeignKey(DetailsData, on_delete=models.CASCADE, related_name="details")
-    #details = models.ForeignKey()
+    language = models.CharField(choices=LANGUAGES, max_length=7, default="E")
+    company = models.CharField(max_length=30, blank=True)
+
 
     def __str__(self):
         return self.name
 
     def getDetails(self):
-        return DetailsData.objects.filter(resume= self)
+        return DetailsData.objects.filter(resume= self)       
 
 class DetailsData(models.Model):
     resume = models.ForeignKey(ResumeData, on_delete=models.CASCADE, related_name="details")

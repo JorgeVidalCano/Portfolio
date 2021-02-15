@@ -62,5 +62,5 @@ class DetailListAdmin(admin.StackedInline):
 @admin.register(ResumeData)
 class ResumeData(admin.ModelAdmin):
     inlines = [DetailListAdmin]
-    list_display = ['name', 'start', 'end', 'resume', 'company']
+    list_display = ['name', 'start', 'end', 'resume', 'company', 'language']
     

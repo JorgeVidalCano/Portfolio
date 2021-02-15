@@ -35,11 +35,18 @@ class Resume(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        experience = ResumeData.objects.filter(resume="X")
+        resume = ResumeData.objects.all().order_by("-end")
+        #sumary = resume.filter(resume="S")
+        mainText = resume.filter(resume="M")
+        education = resume.filter(resume="E")
+        experience = resume.filter(resume="X")
 
         context.update({
             'tab':'Resume',
-            'experience': experience,
+        #    'sumary': sumary,
+            'mainText':mainText[0],
+            'education': education,
+            'experience': experience
         })
 
         return context
