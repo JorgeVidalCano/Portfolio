@@ -71,7 +71,13 @@ class ResumeData(models.Model):
         return self.name
 
     def getDetails(self):
-        return DetailsData.objects.filter(resume= self)       
+        return DetailsData.objects.filter(resume= self)
+
+    def getByLanguage(self, language):
+        if language == None:
+            return ResumeData.objects.filter(language= "E").order_by("-end")
+        else:
+            return ResumeData.objects.filter(language= language).order_by("-end")
 
 class DetailsData(models.Model):
     resume = models.ForeignKey(ResumeData, on_delete=models.CASCADE, related_name="details")
